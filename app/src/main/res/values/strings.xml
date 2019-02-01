@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">MCQ Master</string>
+    <string name="bvs">বাংলা ভাষা ও সাহিত্য"\n"[Mark: 35]</string>
+    <string name="evs">ইংরেজি ভাষা ও সাহিত্য"\n"[Mark: 35]</string>
+    <string name="bangladesh">বাংলাদেশ"\n"[Mark: 30]</string>
+    <string name="international">আন্তর্জাতিক"\n"[Mark: 20]</string>
+    <string name="geography">ভূগোল, পরিবেশ ও দুর্যোগ"\n"[Mark: 10]</string>
+    <string name="general_science">সাধারণ বিজ্ঞান"\n"[Mark: 10]</string>
+    <string name="computer">কম্পিউটার ও তথ্য প্রযুক্তি"\n"[Mark: 15]</string>
+    <string name="mathematics">গাণিতিক যুক্তি"\n"[Mark: 15]</string>
+    <string name="mental">মানসিক দক্ষতা"\n"[Mark: 15]</string>
+    <string name="morality">নৈতিকতা, মূল্যবোধ ও সুশাসন"\n"[Mark: 10]</string>
+    <string name="current_world_bd">সাম্প্রতিক বিশ্ব - বাংলাদেশ</string>
+    <string name="bng_grammar">Bangla Grammar</string>
+    <string name="eng_grammar">English Grammar</string>
+    <string name="eng_vocab">English Vocabulary</string>
+    <string name="pyq">Previous Year Question</string>
+    <string name="bcs">বিসিএস</string>
+    <string name="previous_year_question">বিগত সালের প্রশ্ন</string>
+    <string name="current_world_int">সাম্প্রতিক বিশ্ব - আন্তর্জাতিক</string>
+    <string name="current_world">সাম্প্রতিক বিশ্ব</string>
+    <string name="bd">বাংলাদেশ</string>
+    <string name="int_other">আন্তর্জাতিক ও অন্যান্য</string>
+    <string name="govt_bank">Govt. Bank</string>
+    <string name="recruitment_exams">Recruitment Exams</string>
+    <string name="english">English</string>
+    <string name="english_grammar">English Grammar</string>
+    <string name="bangla">Bangla</string>
+    <string name="bangla_grammar">Bangla Grammar</string>
+    <string name="vocabulary">Vocabulary</string>
+</resources>

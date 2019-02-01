@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mcqmaster.saif_win10.mcqmaster">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".MCQMaster"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".all_second_activity.CV_bcs_bsp" />
+        <activity android:name=".all_second_activity.CV_current_world_bd" />
+        <activity android:name=".all_second_activity.CV_current_world_int" />
+        <activity android:name=".all_second_activity.CV_bcs_bvs" />
+        <activity android:name=".all_second_activity.CV_bcs_evs" />
+        <activity android:name=".all_second_activity.CV_bcs_bd" />
+        <activity android:name=".all_second_activity.CV_bcs_international" />
+        <activity android:name=".all_second_activity.CV_bcs_geo" />
+        <activity android:name=".all_second_activity.CV_bcs_generalS" />
+        <activity android:name=".all_second_activity.CV_bcs_it" />
+        <activity android:name=".all_second_activity.CV_bcs_math" />
+        <activity android:name=".all_second_activity.CV_bcs_mental" />
+        <activity android:name=".all_second_activity.CV_bcs_value" />
+        <activity android:name=".all_second_activity.CV_eng_grammar" />
+        <activity android:name=".all_second_activity.CV_bng_grammar" />
+        <activity android:name=".all_second_activity.CV_eng_vocab" />
+        <activity android:name=".StudyMCQ" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+
+        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+        <!-- My AdMob App ID: ca-app-pub-2522810443010389~4508857974 -->
+
+        <activity android:name=".all_second_activity.CV_gov_bank" />
+        <activity android:name=".StudyMcqV2"></activity>
+    </application>
+
+</manifest>

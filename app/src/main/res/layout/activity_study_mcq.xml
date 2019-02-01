@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4c4d47">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="ID"
+        android:id="@+id/mTxt_ID"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:background="@color/colorPrimaryDark"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mLLmain"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/mTxt_ID"
+        android:weightSum="2"
+        android:background="@color/colorPrimaryDark">
+        <TextView
+            android:id="@+id/mTxt_PointEachQ"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:hint="levelE"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/mTxt_level"
+            android:textAlignment="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="level"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/mCardTopic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        app:cardElevation="60dp"
+        android:orientation="vertical"
+        app:cardCornerRadius="12dp"
+        android:layout_below="@+id/mLLmain">
+
+        <LinearLayout
+            android:id="@+id/mLL1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#70ffba"
+            android:orientation="vertical"
+            android:weightSum="12">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/mTxt_totalQ"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="point/total Question"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/mTxt_Qnumber"
+                    android:textAlignment="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Question No" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/mTxt_quest"
+                android:textSize="18sp"
+                android:textColor="#151515"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="3"
+                android:focusable="false"
+                android:gravity="center"
+                android:hint="Here is the question"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/mChkOpt1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="1"
+                android:focusable="false"
+                android:hint="First option"
+                android:textAlignment="center" />
+
+            <CheckBox
+                android:id="@+id/mChkOpt2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="1"
+                android:focusable="false"
+                android:hint="Second option"
+                android:textAlignment="center" />
+
+            <CheckBox
+                android:id="@+id/mChkOpt3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="1"
+                android:focusable="false"
+                android:hint="Third option"
+                android:textAlignment="center" />
+
+            <CheckBox
+                android:id="@+id/mChkOpt4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="1"
+                android:focusable="false"
+                android:hint="Fourth option"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/mBtn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#ff2d29"
+                android:text="submit"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/mTxt_ans"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="#11ff78"
+                android:gravity="center"
+                android:text="answer"
+                android:textAllCaps="true"
+                android:textColor="#2e2e2e"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/mTxt_Expl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:focusable="false"
+                android:gravity="center"
+                android:hint="Explanation is here"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_above="@+id/adView"
+        android:layout_centerHorizontal="true">
+        <Button
+            android:id="@+id/btn_prev"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="prev."
+            android:textStyle="bold"
+            android:background="@color/btn_color_1"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="1dp"
+            android:shadowRadius="10"
+            android:shadowColor="@color/btn_color_shadow"/>
+        <Button
+            android:id="@+id/btn_refresh"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="refresh"
+            android:textStyle="bold"
+            android:background="@color/btn_color_1"
+            android:layout_margin="0dp"
+            android:shadowRadius="10"
+            android:shadowColor="@color/btn_color_shadow"/>
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="next"
+            android:textStyle="bold"
+            android:background="@color/btn_color_1"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="1dp"
+            android:shadowRadius="100"
+            android:shadowColor="@color/btn_color_shadow"/>
+    </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-2522810443010389/6204125169">
+    </com.google.android.gms.ads.AdView>
+
+</RelativeLayout>

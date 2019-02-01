@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "690348656677",
+    "firebase_url": "https://mcqmaster-cdc2c.firebaseio.com",
+    "project_id": "mcqmaster-cdc2c",
+    "storage_bucket": "mcqmaster-cdc2c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690348656677:android:84bdc22f95aac11a",
+        "android_client_info": {
+          "package_name": "com.mcqmaster.saif_win10.mcqmaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690348656677-30idvvqpl1lr1uln7nle1d0iah6kakk7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mcqmaster.saif_win10.mcqmaster",
+            "certificate_hash": "158d67b1c34ce13ec6043cd850ab689bc4126c95"
+          }
+        },
+        {
+          "client_id": "690348656677-l5r4kiln8ne6dqq92jf8v2f39ru9204o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVdKlQxI_90xnBzydXJu-V3G9dAmuXPNA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690348656677-l5r4kiln8ne6dqq92jf8v2f39ru9204o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
