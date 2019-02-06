@@ -83,7 +83,7 @@ public class CV_bcs_math extends AppCompatActivity {
                             mInterstitialAd.show();
                         } else {
 
-                            Intent intent = new Intent(CV_bcs_math.this, StudyMcqV2.class);
+                            Intent intent = new Intent(CV_bcs_math.this, StudyMCQ.class);
                             intent.putExtra("key_name", post_key);
                             intent.putExtra("childName", "bcs_math");
                             Toast.makeText(CV_bcs_math.this, "Please make sure you turn off the rotation of your device", Toast.LENGTH_LONG).show();
@@ -96,7 +96,7 @@ public class CV_bcs_math extends AppCompatActivity {
                                               {
                                                   @Override
                                                   public void onAdClosed() {
-                                                      Intent intent = new Intent(CV_bcs_math.this, StudyMcqV2.class);
+                                                      Intent intent = new Intent(CV_bcs_math.this, StudyMCQ.class);
                                                       intent.putExtra("key_name", post_key);
                                                       intent.putExtra("childName", "bcs_math");
                                                       Toast.makeText(CV_bcs_math.this, "Please make sure you turn off the rotation of your device", Toast.LENGTH_LONG).show();

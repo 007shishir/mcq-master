@@ -44,5 +44,9 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
     annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"
 
+    //For MathView
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'io.github.kexanie.library:MathView:0.0.6'
+
 }
 apply plugin: 'com.google.gms.google-services'

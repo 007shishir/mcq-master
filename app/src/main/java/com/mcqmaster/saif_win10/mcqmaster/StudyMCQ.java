@@ -1,11 +1,13 @@
 package com.mcqmaster.saif_win10.mcqmaster;
 
+import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.arch.persistence.room.Ignore;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -73,6 +75,7 @@ public class StudyMCQ extends AppCompatActivity {
     String[] questionN = {"q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11", "q12", "q13", "q14", "q15", "q16", "q17", "q18", "q19", "q20", "q21", "q22", "q23", "q24", "q25", "q26", "q27", "q28", "q29", "q30", "q31", "q32", "q33", "q34", "q35", "q36", "q37", "q38", "q39", "q40", "q41"};
 
     int q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15, q16, q17, q18, q19, q20, q21, q22, q23, q24, q25, q26, q27, q28, q29, q30, q31, q32, q33, q34, q35, q36, q37, q38, q39, q40, q41 = 0;
+    int r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35, r36, r37, r38, r39, r40 = 0;
 
     int answeredQn = 0;
     int unAnsweredQN = 0;
@@ -91,6 +94,9 @@ public class StudyMCQ extends AppCompatActivity {
     private TextView mTxt_Qnumber;
     private TextView mTxt_totalQ;
     private TextView mTxt_PointEachQ;
+    private TextView mTxt_cycle;
+    private TextView mTxt_RIGHTvWRONG;
+    private TextView mTxt_Header_topic;
 
     //for next previous and refresh button
     private Button btn_next;
@@ -102,7 +108,7 @@ public class StudyMCQ extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_study_mcq);
+        setContentView(R.layout.another_test);
         Firebase.setAndroidContext(this);
 
         //connecting with viewmodel class
@@ -126,8 +132,7 @@ public class StudyMCQ extends AppCompatActivity {
 
 
         //This code will run after Interstitial code is closed
-        mInterstitialAd.setAdListener(new AdListener()
-                                      {
+        mInterstitialAd.setAdListener(new AdListener() {
                                           @Override
                                           public void onAdClosed() {
                                               StudyMCQ.super.onBackPressed();
@@ -164,6 +169,11 @@ public class StudyMCQ extends AppCompatActivity {
         btn_next = findViewById(R.id.btn_next);
         btn_prev = findViewById(R.id.btn_prev);
         btn_refresh = findViewById(R.id.btn_refresh);
+        mTxt_cycle = findViewById(R.id.mTxt_cycle);
+        mTxt_RIGHTvWRONG = findViewById(R.id.mTxt_RIGHTvWRONG);
+        mTxt_Header_topic = findViewById(R.id.mTxt_Header_topic);
+
+        headerTopic();
 
         updateLevelStatus(level);
         eachQuestStatus();
@@ -174,16 +184,79 @@ public class StudyMCQ extends AppCompatActivity {
 
     }
 
+    public void headerTopic() {
+        switch (child_Name) {
+            case "bcs_bd":
+                mTxt_Header_topic.setText(getResources().getString(R.string.bangladesh));
+                break;
+            case "previous_y_q":
+                mTxt_Header_topic.setText(getResources().getString(R.string.previous_year_question));
+                break;
+            case "bcs_bvs":
+                mTxt_Header_topic.setText(getResources().getString(R.string.bvs));
+                break;
+            case "bcs_evs":
+                mTxt_Header_topic.setText(getResources().getString(R.string.evs));
+                break;
+            case "general_s":
+                mTxt_Header_topic.setText(getResources().getString(R.string.general_science));
+                break;
+            case "bcs_geo":
+                mTxt_Header_topic.setText(getResources().getString(R.string.geography));
+                break;
+            case "CV_bcs_international":
+                mTxt_Header_topic.setText(getResources().getString(R.string.international));
+                break;
+            case "bcs_it":
+                mTxt_Header_topic.setText(getResources().getString(R.string.computer));
+                break;
+            case "bcs_math":
+                mTxt_Header_topic.setText(getResources().getString(R.string.mathematics));
+                break;
+            case "bcs_mental":
+                mTxt_Header_topic.setText(getResources().getString(R.string.mental));
+                break;
+            case "bcs_value":
+                mTxt_Header_topic.setText(getResources().getString(R.string.morality));
+                break;
+            case "bng_grammar":
+                mTxt_Header_topic.setText(getResources().getString(R.string.bng_grammar));
+                break;
+            case "current_world_bd":
+                mTxt_Header_topic.setText(getResources().getString(R.string.current_world_bd));
+                break;
+            case "current_world_int":
+                mTxt_Header_topic.setText(getResources().getString(R.string.current_world_int));
+                break;
+            case "eng_grammar":
+                mTxt_Header_topic.setText(getResources().getString(R.string.eng_grammar));
+                break;
+            case "eng_vocab":
+                mTxt_Header_topic.setText(getResources().getString(R.string.vocabulary));
+                break;
+            case "gov_bank":
+                mTxt_Header_topic.setText(getResources().getString(R.string.govt_bank));
+                break;
+            default:
+                mTxt_Header_topic.setText("Report ERROR!");
+                break;
+        }
+
+    }
+
     public void updateLevelEachQuestionStatus(int a) {
         if (a < 2) {
             mTxt_PointEachQ.setText("Primary");
-            mTxt_PointEachQ.setBackgroundColor(Color.parseColor("red"));
+            //mTxt_PointEachQ.setBackgroundColor(Color.parseColor("#80ff1a1a"));
+            mTxt_PointEachQ.setBackground(getResources().getDrawable(R.drawable.button_red_transperant));
         } else if (a == 2 || a == 3) {
             mTxt_PointEachQ.setText("Learning");
-            mTxt_PointEachQ.setBackgroundColor(Color.parseColor("yellow"));
+            //mTxt_PointEachQ.setBackgroundColor(Color.parseColor("#80ffff1a"));
+            mTxt_PointEachQ.setBackground(getResources().getDrawable(R.drawable.button_yellow_transperant));
         } else {
             mTxt_PointEachQ.setText("Master");
-            mTxt_PointEachQ.setBackgroundColor(Color.parseColor("green"));
+            //mTxt_PointEachQ.setBackgroundColor(Color.parseColor("#8033ff33"));
+            mTxt_PointEachQ.setBackground(getResources().getDrawable(R.drawable.button_green_transperant));
         }
     }
 
@@ -196,20 +269,27 @@ public class StudyMCQ extends AppCompatActivity {
     }
 
     public void initialState() {
-        String pointVquestion = String.valueOf(totalPoint) + "/" + totalQ + "   cycle: " + cycle;
+        String pointVquestion = "Point: " + String.valueOf(totalPoint) + "/" + totalQ;
+        String countTry = "Tried: " + cycle + " times";
         String questionNo = "Question No: " + questionN[mQuestNum - 1];
         mTxt_totalQ.setText(pointVquestion);
         mTxt_Qnumber.setText(questionNo);
+        mTxt_cycle.setText(countTry);
     }
 
     public void initialState_offline() {
-        String pointVquestion = String.valueOf(totalPoint) + "/" + String.valueOf(totalQuestion) + "   cycle: " + cycle;
+        String pointVquestion = "Point: " + String.valueOf(totalPoint) + "/" + String.valueOf(totalQuestion);
+        String countTry = "Tried: " + cycle + " times";
         String questionNo = "Question No: " + questionN[mQuestNum - 1];
         mTxt_totalQ.setText(pointVquestion);
         mTxt_Qnumber.setText(questionNo);
+        mTxt_cycle.setText(countTry);
     }
 
     public void updateQuestion() {
+
+        //it reads from room database and update room database
+        commonLevelStatus();
 
         idEachQuest(child_Name, mPost_key, questionN[mQuestNum - 1]);
 
@@ -328,9 +408,15 @@ public class StudyMCQ extends AppCompatActivity {
                         String mSubmit = "SUBMIT";
                         String mAnswer = "ANSWER";
                         String mExplanation = "Explanation will be here";
+                        String mRightvWrong = "Check";
+
+                        //set Background color for RIGHT v WRONG indicator Text box
+                        mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.button_sub_design));
+
                         mBtn_submit.setText(mSubmit);
                         mTxt_ans.setText(mAnswer);
                         mTxt_expl.setText(mExplanation);
+                        mTxt_RIGHTvWRONG.setText(mRightvWrong);
                         mQuestNum++;
                         eachQuestStatus();
                         //findQnumber++;
@@ -341,20 +427,17 @@ public class StudyMCQ extends AppCompatActivity {
 
                         if (mQuestNum > totalQuestion) {
                             mQuestNum = 1;
+                            //to make value of int r back to zero
+                            make_int_r_zero();
+                            notificationForTotalPoint();
                             eachQuestStatus();
-                            //findQnumber = 0;
-
                             cycle++;
                             totalPoint = 0;
-
                             readFromRoomDatabase();
-                            //updateQuestion();
                             initialState();
 
                         } else {
-
                             readFromRoomDatabase();
-                            //updateQuestion();
                         }
 
                     }
@@ -374,27 +457,34 @@ public class StudyMCQ extends AppCompatActivity {
                         ans = answer;
 
                         if (ansChoice.equals(answer)) {
-                            showResult = "Right! Ans: " + answer;
+                            showResult = "Ans: " + answer;
+                            mTxt_RIGHTvWRONG.setText("RIGHT");
                             mTxt_ans.setText(showResult);
                             //Toast.makeText(McqQuestion.this, "Correct", Toast.LENGTH_SHORT).show();
 
+                            //set Background color for RIGHT v WRONG indicator Text box
+                            mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.button_green_transperant));
+
                             answeredQn = mQuestNum - 1;
                             totalPoint++;
-                            level = levelINCREASE(level);
 
+                            level = levelINCREASE(level);
                             //For room database use only
                             level_cards = level;
 
-                            updateLevelStatus(level);
+                            //updateLevelStatus(level);
                             eachQuestStatusSUCCESS();
-
-                            //idEachQuest(child_Name,mPost_key,questionN[answeredQn]);
 
                             initialState();
 
                         } else if (ansChoice.equals("NoAnswerChoosen")) {
                             initialState();
-                            showResult = "Wrong! Ans: " + answer;
+                            showResult = "Ans: " + answer;
+                            mTxt_RIGHTvWRONG.setText("WRONG");
+
+                            //set Background color for RIGHT v WRONG indicator Text box
+                            mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.button_red_transperant));
+
                             mTxt_ans.setText(showResult);
                             unAnsweredQN = mQuestNum - 1;
                             eachQuestStatusFAILURE();
@@ -403,10 +493,15 @@ public class StudyMCQ extends AppCompatActivity {
                             //For room database use only
                             level_cards = level;
 
-                            updateLevelStatus(level);
+                            //updateLevelStatus(level);
                             //idEachQuest(child_Name,mPost_key,questionN[unAnsweredQN]);
                         } else {
-                            showResult = "Wrong! Ans: " + answer;
+                            showResult = "Ans: " + answer;
+                            mTxt_RIGHTvWRONG.setText("WRONG");
+
+                            //set Background color for RIGHT v WRONG indicator Text box
+                            mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.button_red_transperant));
+
                             mTxt_ans.setText(showResult);
                             //Toast.makeText(McqQuestion.this, "Wrong Answer, Question No.: " + questionN[unAnsweredQN], Toast.LENGTH_SHORT).show();
 
@@ -418,7 +513,7 @@ public class StudyMCQ extends AppCompatActivity {
                             //For room database use only
                             level_cards = level;
 
-                            updateLevelStatus(level);
+                            //updateLevelStatus(level);
                             //idEachQuest(child_Name,mPost_key,questionN[unAnsweredQN]);
 
                         }
@@ -478,6 +573,7 @@ public class StudyMCQ extends AppCompatActivity {
             } else if (a == 2 || a == 3) {
                 a++;
                 return a;
+
             } else {
                 a = 4;
                 return a;
@@ -496,6 +592,7 @@ public class StudyMCQ extends AppCompatActivity {
             mTxt_level.setText("Learning");
             mTxt_level.setBackgroundColor(Color.parseColor("yellow"));
         } else {
+            //Toast.makeText(StudyMCQ.this, "Congratulation, you got the highest mark!", Toast.LENGTH_SHORT).show();
             mTxt_level.setText("Master");
             mTxt_level.setBackgroundColor(Color.parseColor("green"));
         }
@@ -506,6 +603,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q1":
                 q1 = eachQuestStatusINCREASE(q1);
 
+                r1 = 1;
                 //For room database use only
                 level_question = q1;
                 updateLevelEachQuestionStatus(q1);
@@ -513,6 +611,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q2":
                 q2 = eachQuestStatusINCREASE(q2);
 
+                r2 = 1;
                 //For room database use only
                 level_question = q2;
                 updateLevelEachQuestionStatus(q2);
@@ -520,6 +619,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q3":
                 q3 = eachQuestStatusINCREASE(q3);
 
+                r3 = 1;
                 //For room database use only
                 level_question = q3;
                 updateLevelEachQuestionStatus(q3);
@@ -527,6 +627,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q4":
                 q4 = eachQuestStatusINCREASE(q4);
 
+                r4 = 1;
                 //For room database use only
                 level_question = q4;
                 updateLevelEachQuestionStatus(q4);
@@ -534,6 +635,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q5":
                 q5 = eachQuestStatusINCREASE(q5);
 
+                r5 = 1;
                 //For room database use only
                 level_question = q5;
                 updateLevelEachQuestionStatus(q5);
@@ -541,6 +643,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q6":
                 q6 = eachQuestStatusINCREASE(q6);
 
+                r6 = 1;
                 //For room database use only
                 level_question = q6;
                 updateLevelEachQuestionStatus(q6);
@@ -548,6 +651,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q7":
                 q7 = eachQuestStatusINCREASE(q7);
 
+                r7 = 1;
                 //For room database use only
                 level_question = q7;
                 updateLevelEachQuestionStatus(q7);
@@ -555,6 +659,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q8":
                 q8 = eachQuestStatusINCREASE(q8);
 
+                r8 = 1;
                 //For room database use only
                 level_question = q8;
                 updateLevelEachQuestionStatus(q8);
@@ -562,6 +667,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q9":
                 q9 = eachQuestStatusINCREASE(q9);
 
+                r9 = 1;
                 //For room database use only
                 level_question = q9;
                 updateLevelEachQuestionStatus(q9);
@@ -569,6 +675,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q10":
                 q10 = eachQuestStatusINCREASE(q10);
 
+                r10 = 1;
                 //For room database use only
                 level_question = q10;
                 updateLevelEachQuestionStatus(q10);
@@ -576,6 +683,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q11":
                 q11 = eachQuestStatusINCREASE(q11);
 
+                r11 = 1;
                 //For room database use only
                 level_question = q11;
                 updateLevelEachQuestionStatus(q11);
@@ -583,6 +691,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q12":
                 q12 = eachQuestStatusINCREASE(q12);
 
+                r12 = 1;
                 //For room database use only
                 level_question = q12;
                 updateLevelEachQuestionStatus(q12);
@@ -590,6 +699,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q13":
                 q13 = eachQuestStatusINCREASE(q13);
 
+                r13 = 1;
                 //For room database use only
                 level_question = q13;
                 updateLevelEachQuestionStatus(q13);
@@ -597,6 +707,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q14":
                 q14 = eachQuestStatusINCREASE(q14);
 
+                r14 = 1;
                 //For room database use only
                 level_question = q14;
                 updateLevelEachQuestionStatus(q14);
@@ -604,6 +715,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q15":
                 q15 = eachQuestStatusINCREASE(q15);
 
+                r15 = 1;
                 //For room database use only
                 level_question = q15;
                 updateLevelEachQuestionStatus(q15);
@@ -611,6 +723,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q16":
                 q16 = eachQuestStatusINCREASE(q16);
 
+                r16 = 1;
                 //For room database use only
                 level_question = q16;
                 updateLevelEachQuestionStatus(q16);
@@ -618,6 +731,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q17":
                 q17 = eachQuestStatusINCREASE(q17);
 
+                r17 = 1;
                 //For room database use only
                 level_question = q17;
                 updateLevelEachQuestionStatus(q17);
@@ -625,6 +739,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q18":
                 q18 = eachQuestStatusINCREASE(q18);
 
+                r18 = 1;
                 //For room database use only
                 level_question = q18;
                 updateLevelEachQuestionStatus(q18);
@@ -632,6 +747,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q19":
                 q19 = eachQuestStatusINCREASE(q19);
 
+                r19 = 1;
                 //For room database use only
                 level_question = q19;
                 updateLevelEachQuestionStatus(q19);
@@ -639,6 +755,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q20":
                 q20 = eachQuestStatusINCREASE(q20);
 
+                r20 = 1;
                 //For room database use only
                 level_question = q20;
                 updateLevelEachQuestionStatus(q20);
@@ -646,6 +763,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q21":
                 q21 = eachQuestStatusINCREASE(q21);
 
+                r21 = 1;
                 //For room database use only
                 level_question = q21;
                 updateLevelEachQuestionStatus(q21);
@@ -653,6 +771,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q22":
                 q22 = eachQuestStatusINCREASE(q22);
 
+                r22 = 1;
                 //For room database use only
                 level_question = q22;
                 updateLevelEachQuestionStatus(q22);
@@ -660,6 +779,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q23":
                 q23 = eachQuestStatusINCREASE(q23);
 
+                r23 = 1;
                 //For room database use only
                 level_question = q23;
                 updateLevelEachQuestionStatus(q23);
@@ -667,6 +787,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q24":
                 q24 = eachQuestStatusINCREASE(q24);
 
+                r24 = 1;
                 //For room database use only
                 level_question = q24;
                 updateLevelEachQuestionStatus(q24);
@@ -674,6 +795,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q25":
                 q25 = eachQuestStatusINCREASE(q25);
 
+                r25 = 1;
                 //For room database use only
                 level_question = q25;
                 updateLevelEachQuestionStatus(q25);
@@ -681,6 +803,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q26":
                 q26 = eachQuestStatusINCREASE(q26);
 
+                r26 = 1;
                 //For room database use only
                 level_question = q26;
                 updateLevelEachQuestionStatus(q26);
@@ -688,6 +811,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q27":
                 q27 = eachQuestStatusINCREASE(q27);
 
+                r27 = 1;
                 //For room database use only
                 level_question = q27;
                 updateLevelEachQuestionStatus(q27);
@@ -695,6 +819,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q28":
                 q28 = eachQuestStatusINCREASE(q28);
 
+                r28 = 1;
                 //For room database use only
                 level_question = q28;
                 updateLevelEachQuestionStatus(q28);
@@ -702,6 +827,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q29":
                 q29 = eachQuestStatusINCREASE(q29);
 
+                r29 = 1;
                 //For room database use only
                 level_question = q29;
                 updateLevelEachQuestionStatus(q29);
@@ -709,6 +835,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q30":
                 q30 = eachQuestStatusINCREASE(q30);
 
+                r30 = 1;
                 //For room database use only
                 level_question = q30;
                 updateLevelEachQuestionStatus(q30);
@@ -716,6 +843,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q31":
                 q31 = eachQuestStatusINCREASE(q31);
 
+                r31 = 1;
                 //For room database use only
                 level_question = q31;
                 updateLevelEachQuestionStatus(q31);
@@ -723,6 +851,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q32":
                 q32 = eachQuestStatusINCREASE(q32);
 
+                r32 = 1;
                 //For room database use only
                 level_question = q32;
                 updateLevelEachQuestionStatus(q32);
@@ -730,6 +859,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q33":
                 q33 = eachQuestStatusINCREASE(q33);
 
+                r33 = 1;
                 //For room database use only
                 level_question = q33;
                 updateLevelEachQuestionStatus(q33);
@@ -737,6 +867,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q34":
                 q34 = eachQuestStatusINCREASE(q34);
 
+                r34 = 1;
                 //For room database use only
                 level_question = q34;
                 updateLevelEachQuestionStatus(q34);
@@ -744,6 +875,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q35":
                 q35 = eachQuestStatusINCREASE(q35);
 
+                r35 = 1;
                 //For room database use only
                 level_question = q35;
                 updateLevelEachQuestionStatus(q35);
@@ -751,6 +883,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q36":
                 q36 = eachQuestStatusINCREASE(q36);
 
+                r36 = 1;
                 //For room database use only
                 level_question = q36;
                 updateLevelEachQuestionStatus(q36);
@@ -758,6 +891,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q37":
                 q37 = eachQuestStatusINCREASE(q37);
 
+                r37 = 1;
                 //For room database use only
                 level_question = q37;
                 updateLevelEachQuestionStatus(q37);
@@ -765,6 +899,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q38":
                 q38 = eachQuestStatusINCREASE(q38);
 
+                r38 = 1;
                 //For room database use only
                 level_question = q38;
                 updateLevelEachQuestionStatus(q38);
@@ -772,6 +907,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q39":
                 q39 = eachQuestStatusINCREASE(q39);
 
+                r39 = 1;
                 //For room database use only
                 level_question = q39;
                 updateLevelEachQuestionStatus(q39);
@@ -779,6 +915,7 @@ public class StudyMCQ extends AppCompatActivity {
             case "q40":
                 q40 = eachQuestStatusINCREASE(q40);
 
+                r40 = 1;
                 //For room database use only
                 level_question = q40;
                 updateLevelEachQuestionStatus(q40);
@@ -937,240 +1074,280 @@ public class StudyMCQ extends AppCompatActivity {
         switch (questionN[unAnsweredQN]) {
             case "q1":
                 q1 = eachQuestStatusDECREASE(q1);
+                r1 = 1;
                 //For room database use only
                 level_question = q1;
                 updateLevelEachQuestionStatus(q1);
                 break;
             case "q2":
                 q2 = eachQuestStatusDECREASE(q2);
+                r2 = 1;
                 //For room database use only
                 level_question = q2;
                 updateLevelEachQuestionStatus(q2);
                 break;
             case "q3":
                 q3 = eachQuestStatusDECREASE(q3);
+                r3 = 1;
                 //For room database use only
                 level_question = q3;
                 updateLevelEachQuestionStatus(q3);
                 break;
             case "q4":
                 q4 = eachQuestStatusDECREASE(q4);
+                r4 = 1;
                 //For room database use only
                 level_question = q4;
                 updateLevelEachQuestionStatus(q4);
                 break;
             case "q5":
                 q5 = eachQuestStatusDECREASE(q5);
+                r5 = 1;
                 //For room database use only
                 level_question = q5;
                 updateLevelEachQuestionStatus(q5);
                 break;
             case "q6":
                 q6 = eachQuestStatusDECREASE(q6);
+                r6 = 1;
                 //For room database use only
                 level_question = q6;
                 updateLevelEachQuestionStatus(q6);
                 break;
             case "q7":
                 q7 = eachQuestStatusDECREASE(q7);
+                r7 = 1;
                 //For room database use only
                 level_question = q7;
                 updateLevelEachQuestionStatus(q7);
                 break;
             case "q8":
                 q8 = eachQuestStatusDECREASE(q8);
+                r8 = 1;
                 //For room database use only
                 level_question = q8;
                 updateLevelEachQuestionStatus(q8);
                 break;
             case "q9":
                 q9 = eachQuestStatusDECREASE(q9);
+                r9 = 1;
                 //For room database use only
                 level_question = q9;
                 updateLevelEachQuestionStatus(q9);
                 break;
             case "q10":
                 q10 = eachQuestStatusDECREASE(q10);
+                r10 = 1;
                 //For room database use only
                 level_question = q10;
                 updateLevelEachQuestionStatus(q10);
                 break;
             case "q11":
                 q11 = eachQuestStatusDECREASE(q11);
+                r11 = 1;
                 //For room database use only
                 level_question = q11;
                 updateLevelEachQuestionStatus(q11);
                 break;
             case "q12":
                 q12 = eachQuestStatusDECREASE(q12);
+                r12 = 1;
                 //For room database use only
                 level_question = q12;
                 updateLevelEachQuestionStatus(q12);
                 break;
             case "q13":
                 q13 = eachQuestStatusDECREASE(q13);
+                r13 = 1;
                 //For room database use only
                 level_question = q13;
                 updateLevelEachQuestionStatus(q13);
                 break;
             case "q14":
                 q14 = eachQuestStatusDECREASE(q14);
+                r14 = 1;
                 //For room database use only
                 level_question = q14;
                 updateLevelEachQuestionStatus(q14);
                 break;
             case "q15":
                 q15 = eachQuestStatusDECREASE(q15);
+                r15 = 1;
                 //For room database use only
                 level_question = q15;
                 updateLevelEachQuestionStatus(q15);
                 break;
             case "q16":
                 q16 = eachQuestStatusDECREASE(q16);
+                r16 = 1;
                 //For room database use only
                 level_question = q16;
                 updateLevelEachQuestionStatus(q16);
                 break;
             case "q17":
                 q17 = eachQuestStatusDECREASE(q17);
+                r17 = 1;
                 //For room database use only
                 level_question = q17;
                 updateLevelEachQuestionStatus(q17);
                 break;
             case "q18":
                 q18 = eachQuestStatusDECREASE(q18);
+                r18 = 1;
                 //For room database use only
                 level_question = q18;
                 updateLevelEachQuestionStatus(q18);
                 break;
             case "q19":
                 q19 = eachQuestStatusDECREASE(q19);
+                r19 = 1;
                 //For room database use only
                 level_question = q19;
                 updateLevelEachQuestionStatus(q19);
                 break;
             case "q20":
                 q20 = eachQuestStatusDECREASE(q20);
+                r20 = 1;
                 //For room database use only
                 level_question = q20;
                 updateLevelEachQuestionStatus(q20);
                 break;
             case "q21":
                 q21 = eachQuestStatusDECREASE(q21);
+                r21 = 1;
                 //For room database use only
                 level_question = q21;
                 updateLevelEachQuestionStatus(q21);
                 break;
             case "q22":
                 q22 = eachQuestStatusDECREASE(q22);
+                r22 = 1;
                 //For room database use only
                 level_question = q22;
                 updateLevelEachQuestionStatus(q22);
                 break;
             case "q23":
                 q23 = eachQuestStatusDECREASE(q23);
+                r23 = 1;
                 //For room database use only
                 level_question = q23;
                 updateLevelEachQuestionStatus(q23);
                 break;
             case "q24":
                 q24 = eachQuestStatusDECREASE(q24);
+                r24 = 1;
                 //For room database use only
                 level_question = q24;
                 updateLevelEachQuestionStatus(q24);
                 break;
             case "q25":
                 q25 = eachQuestStatusDECREASE(q25);
+                r25 = 1;
                 //For room database use only
                 level_question = q25;
                 updateLevelEachQuestionStatus(q25);
                 break;
             case "q26":
                 q26 = eachQuestStatusDECREASE(q26);
+                r26 = 1;
                 //For room database use only
                 level_question = q26;
                 updateLevelEachQuestionStatus(q26);
                 break;
             case "q27":
                 q27 = eachQuestStatusDECREASE(q27);
+                r27 = 1;
                 //For room database use only
                 level_question = q27;
                 updateLevelEachQuestionStatus(q27);
                 break;
             case "q28":
                 q28 = eachQuestStatusDECREASE(q28);
+                r28 = 1;
                 //For room database use only
                 level_question = q28;
                 updateLevelEachQuestionStatus(q28);
                 break;
             case "q29":
                 q29 = eachQuestStatusDECREASE(q29);
+                r29 = 1;
                 //For room database use only
                 level_question = q29;
                 updateLevelEachQuestionStatus(q29);
                 break;
             case "q30":
                 q30 = eachQuestStatusDECREASE(q30);
+                r30 = 1;
                 //For room database use only
                 level_question = q30;
                 updateLevelEachQuestionStatus(q30);
                 break;
             case "q31":
                 q31 = eachQuestStatusDECREASE(q31);
+                r31 = 1;
                 //For room database use only
                 level_question = q31;
                 updateLevelEachQuestionStatus(q31);
                 break;
             case "q32":
                 q32 = eachQuestStatusDECREASE(q32);
+                r32 = 1;
                 //For room database use only
                 level_question = q32;
                 updateLevelEachQuestionStatus(q32);
                 break;
             case "q33":
                 q33 = eachQuestStatusDECREASE(q33);
+                r33 = 1;
                 //For room database use only
                 level_question = q33;
                 updateLevelEachQuestionStatus(q33);
                 break;
             case "q34":
                 q34 = eachQuestStatusDECREASE(q34);
+                r34 = 1;
                 //For room database use only
                 level_question = q34;
                 updateLevelEachQuestionStatus(q34);
                 break;
             case "q35":
                 q35 = eachQuestStatusDECREASE(q35);
+                r35 = 1;
                 //For room database use only
                 level_question = q35;
                 updateLevelEachQuestionStatus(q35);
                 break;
             case "q36":
                 q36 = eachQuestStatusDECREASE(q36);
+                r36 = 1;
                 //For room database use only
                 level_question = q36;
                 updateLevelEachQuestionStatus(q36);
                 break;
             case "q37":
                 q37 = eachQuestStatusDECREASE(q37);
+                r37 = 1;
                 //For room database use only
                 level_question = q37;
                 updateLevelEachQuestionStatus(q37);
                 break;
             case "q38":
                 q38 = eachQuestStatusDECREASE(q38);
+                r38 = 1;
                 //For room database use only
                 level_question = q38;
                 updateLevelEachQuestionStatus(q38);
                 break;
             case "q39":
                 q39 = eachQuestStatusDECREASE(q39);
+                r39 = 1;
                 //For room database use only
                 level_question = q39;
                 updateLevelEachQuestionStatus(q39);
                 break;
             case "q40":
                 q40 = eachQuestStatusDECREASE(q40);
+                r40 = 1;
                 //For room database use only
                 level_question = q40;
                 updateLevelEachQuestionStatus(q40);
@@ -1256,18 +1433,15 @@ public class StudyMCQ extends AppCompatActivity {
 
 
                 totalQuestion = mqe.getTotal_N_Q();
-                String special_id = child_Name + "_" + mPost_key + "_" + questionN[totalQuestion-1];
+                String special_id = child_Name + "_" + mPost_key + "_" + questionN[totalQuestion - 1];
                 List<Mcq_Q_entity> read_level_fromDatabase = MainActivity.mcq_database.mcq_q_dao().find_quest_option(special_id);
 
-                if (read_level_fromDatabase.isEmpty())
-                {
+                if (read_level_fromDatabase.isEmpty()) {
                     level_cards_offline = 0;
                     updateLevelStatus(level_cards_offline);
                 }
-                if (!read_level_fromDatabase.isEmpty())
-                {
-                    for (Mcq_Q_entity mqe_level: read_level_fromDatabase)
-                    {
+                if (!read_level_fromDatabase.isEmpty()) {
+                    for (Mcq_Q_entity mqe_level : read_level_fromDatabase) {
                         level_cards_offline = mqe_level.getLevel_cards();
                         updateLevelStatus(level_cards_offline);
                     }
@@ -1306,9 +1480,15 @@ public class StudyMCQ extends AppCompatActivity {
                                 String mSubmit = "SUBMIT";
                                 String mAnswer = "ANSWER";
                                 String mExplanation = "Explanation will be here";
+                                String mRightvWrong = "Check";
+
+                                //set Background color for RIGHT v WRONG indicator Text box
+                                mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.button_sub_design));
+
                                 mBtn_submit.setText(mSubmit);
                                 mTxt_ans.setText(mAnswer);
                                 mTxt_expl.setText(mExplanation);
+                                mTxt_RIGHTvWRONG.setText(mRightvWrong);
 
                                 //Increase the question number
                                 mQuestNum++;
@@ -1321,6 +1501,8 @@ public class StudyMCQ extends AppCompatActivity {
                                 if (mQuestNum > totalQuestion) {
                                     mQuestNum = 1;
 
+                                    make_int_r_zero();
+                                    notificationForTotalPoint();
                                     eachQuestStatus();
                                     readFromRoomDatabase();
 
@@ -1349,53 +1531,66 @@ public class StudyMCQ extends AppCompatActivity {
                         e = get_e;
 
                         if (ansChoice.equals(get_ans)) {
-                            showResult = "Right! Ans: " + get_ans;
+                            showResult = "Ans: " + get_ans;
                             mTxt_ans.setText(showResult);
+
+                            mTxt_RIGHTvWRONG.setText("RIGHT!");
                             //Toast.makeText(McqQuestion.this, "Correct", Toast.LENGTH_SHORT).show();
 
+                            //set Background color for RIGHT v WRONG indicator Text box
+                            mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.button_green_transperant));
+
                             answeredQn = mQuestNum - 1;
-                            totalPoint++;
+                            //eachQuestStatusSUCCESS() is replaced with stopRepeatMarkCountSUCCESS() to stop repeat count
+                            //eachQuestStatusSUCCESS();
+                            stopRepeatMarkCountSUCCESS();
 
                             level_offline = levelINCREASE_offline(level_offline);
                             //For room database use only
                             level_cards = level_offline;
-
-                            //updateLevelStatus(level_offline);
-
-                            eachQuestStatusSUCCESS();
 
                             initialState_offline();
                             addQuestionDatabase();
 
                         } else if (ansChoice.equals("NoAnswerChoosen")) {
                             initialState_offline();
-                            showResult = "Wrong! Ans: " + get_ans;
+                            showResult = "Ans: " + get_ans;
                             mTxt_ans.setText(showResult);
-                            unAnsweredQN = mQuestNum - 1;
-                            eachQuestStatusFAILURE();
-                            level_offline = levelDECREASE(level_offline);
+                            mTxt_RIGHTvWRONG.setText("WRONG!");
 
+                            //set Background color for RIGHT v WRONG indicator Text box
+                            mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.button_red_transperant));
+
+                            unAnsweredQN = mQuestNum - 1;
+
+                            stopRepeatMarkCountFAILURE();
+                            //eachQuestStatusFAILURE();
+
+                            level_offline = levelDECREASE(level_offline);
                             //For room database use only
                             level_cards = level_offline;
-
-                            //updateLevelStatus(level_offline);
 
                             addQuestionDatabase();
 
                         } else {
-                            showResult = "Wrong! Ans: " + get_ans;
+                            showResult = "Ans: " + get_ans;
                             mTxt_ans.setText(showResult);
+                            mTxt_RIGHTvWRONG.setText("WRONG!");
                             //Toast.makeText(McqQuestion.this, "Wrong Answer, Question No.: " + questionN[unAnsweredQN], Toast.LENGTH_SHORT).show();
+
+                            //set Background color for RIGHT v WRONG indicator Text box
+                            mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.button_red_transperant));
 
                             initialState_offline();
                             unAnsweredQN = mQuestNum - 1;
-                            eachQuestStatusFAILURE();
+
+                            stopRepeatMarkCountFAILURE();
+                            //eachQuestStatusFAILURE();
+
                             level_offline = levelDECREASE(level_offline);
 
                             //For room database use only
                             level_cards = level_offline;
-
-                            //updateLevelStatus(level_offline);
 
                             addQuestionDatabase();
                         }
@@ -1461,11 +1656,19 @@ public class StudyMCQ extends AppCompatActivity {
         }
     }
 
-    public void next_previous_refresh_forRoomDatabase ()
-    {
+    public void next_previous_refresh_forRoomDatabase() {
         btn_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String mSubmit = "SUBMIT";
+                String mAnswer = "ANSWER";
+                String mExplanation = "Explanation will be here";
+                String chooseAnswer = "Check";
+                mBtn_submit.setText(mSubmit);
+                mTxt_ans.setText(mAnswer);
+                mTxt_expl.setText(mExplanation);
+                mTxt_RIGHTvWRONG.setText(chooseAnswer);
+
                 updateQuestion();
             }
         });
@@ -1473,7 +1676,6 @@ public class StudyMCQ extends AppCompatActivity {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 onCLICKonNEXT_offline();
             }
         });
@@ -1482,13 +1684,12 @@ public class StudyMCQ extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                onCLICKonPREV_offline ();
+                onCLICKonPREV_offline();
             }
         });
     }
 
-    public void onCLICKonNEXT_offline ()
-    {
+    public void onCLICKonNEXT_offline() {
         //Changing the text for submit, answer and explanation view
         String mSubmit = "SUBMIT";
         String mAnswer = "ANSWER";
@@ -1520,8 +1721,7 @@ public class StudyMCQ extends AppCompatActivity {
         }
     }
 
-    public void onCLICKonPREV_offline ()
-    {
+    public void onCLICKonPREV_offline() {
         //Changing the text for submit, answer and explanation view
         String mSubmit = "SUBMIT";
         String mAnswer = "ANSWER";
@@ -1532,8 +1732,7 @@ public class StudyMCQ extends AppCompatActivity {
 
         //Increase the question number
 
-        if (cycle == 0 && mQuestNum == 1)
-        {
+        if (cycle == 0 && mQuestNum == 1) {
             mQuestNum++;
         }
 
@@ -1542,14 +1741,13 @@ public class StudyMCQ extends AppCompatActivity {
         uncheckOption();
 
 
-        if (mQuestNum == 1 && cycle!=0) {
+        if (mQuestNum == 1 && cycle != 0) {
             mQuestNum = totalQuestion;
 
             eachQuestStatus();
             readFromRoomDatabase();
 
-            if (cycle>0)
-            {
+            if (cycle > 0) {
                 cycle--;
             }
 
@@ -1570,5 +1768,841 @@ public class StudyMCQ extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    public void notificationForTotalPoint() {
+        if (totalPoint == totalQuestion) {
+            Toast.makeText(StudyMCQ.this, "Congratulation, you got the highest mark!", Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(StudyMCQ.this, "Total Point: " + totalPoint, Toast.LENGTH_LONG).show();
+    }
+
+    public void commonLevelStatus() {
+        String special_id = child_Name + "_" + mPost_key + "_" + questionN[totalQuestion - 1];
+        List<Mcq_Q_entity> read_level_fromDatabase = MainActivity.mcq_database.mcq_q_dao().find_quest_option(special_id);
+
+        if (read_level_fromDatabase.isEmpty()) {
+            level_cards_offline = 0;
+            updateLevelStatus(level_cards_offline);
+        }
+        if (!read_level_fromDatabase.isEmpty()) {
+            for (Mcq_Q_entity mqe_level : read_level_fromDatabase) {
+                level_cards_offline = mqe_level.getLevel_cards();
+                updateLevelStatus(level_cards_offline);
+            }
+        }
+    }
+
+    public void stopRepeatMarkCountSUCCESS() {
+        switch (questionN[mQuestNum - 1]) {
+            case "q1":
+                if (r1 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r1 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q2":
+                if (r2 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r2 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q3":
+                if (r3 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r3 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q4":
+                if (r4 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r4 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q5":
+                if (r5 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r5 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q6":
+                if (r6 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r6 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q7":
+                if (r7 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r7 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q8":
+                if (r8 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r8 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q9":
+                if (r9 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r9 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q10":
+                if (r10 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r10 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q11":
+                if (r11 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r11 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q12":
+                if (r12 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r12 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q13":
+                if (r13 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r13 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q14":
+                if (r14 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r14 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q15":
+                if (r15 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r15 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q16":
+                if (r16 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r16 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q17":
+                if (r17 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r17 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q18":
+                if (r18 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r18 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q19":
+                if (r19 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r19 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q20":
+                if (r20 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r20 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q21":
+                if (r21 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r21 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q22":
+                if (r22 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r22 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q23":
+                if (r23 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r23 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q24":
+                if (r24 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r24 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q25":
+                if (r25 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r25 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q26":
+                if (r26 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r26 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q27":
+                if (r27 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r27 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q28":
+                if (r28 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r28 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q29":
+                if (r29 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r29 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q30":
+                if (r30 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r30 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q31":
+                if (r31 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r31 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q32":
+                if (r32 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r32 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q33":
+                if (r33 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r33 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q34":
+                if (r34 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r34 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q35":
+                if (r35 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r35 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q36":
+                if (r36 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r36 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q37":
+                if (r37 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r37 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q38":
+                if (r38 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r38 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q39":
+                if (r39 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r39 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q40":
+                if (r40 == 0) {
+                    totalPoint++;
+                    eachQuestStatusSUCCESS();
+                    break;
+                }
+                if (r40 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+    }
+
+    public void stopRepeatMarkCountFAILURE() {
+        switch (questionN[mQuestNum - 1]) {
+            case "q1":
+                if (r1 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r1 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q2":
+                if (r2 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r2 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q3":
+                if (r3 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r3 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q4":
+                if (r4 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r4 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q5":
+                if (r5 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r5 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q6":
+                if (r6 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r6 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q7":
+                if (r7 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r7 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q8":
+                if (r8 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r8 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q9":
+                if (r9 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r9 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q10":
+                if (r10 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r10 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q11":
+                if (r11 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r11 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q12":
+                if (r12 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r12 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q13":
+                if (r13 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r13 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q14":
+                if (r14 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r14 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q15":
+                if (r15 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r15 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q16":
+                if (r16 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r16 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q17":
+                if (r17 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r17 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q18":
+                if (r18 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r18 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q19":
+                if (r19 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r19 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q20":
+                if (r20 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r20 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q21":
+                if (r21 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r21 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q22":
+                if (r22 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r22 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q23":
+                if (r23 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r23 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q24":
+                if (r24 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r24 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q25":
+                if (r25 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r25 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q26":
+                if (r26 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r26 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q27":
+                if (r27 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r27 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q28":
+                if (r28 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r28 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q29":
+                if (r29 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r29 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q30":
+                if (r30 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r30 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q31":
+                if (r31 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r31 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q32":
+                if (r32 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r32 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q33":
+                if (r33 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r33 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q34":
+                if (r34 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r34 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q35":
+                if (r35 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r35 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q36":
+                if (r36 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r36 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q37":
+                if (r37 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r37 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q38":
+                if (r38 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r38 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q39":
+                if (r39 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r39 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case "q40":
+                if (r40 == 0) {
+                    eachQuestStatusFAILURE();
+                    break;
+                }
+                if (r40 == 1) {
+                    Toast.makeText(StudyMCQ.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+    }
+
+    public void make_int_r_zero() {
+        r1 = 0;
+        r2 = 0;
+        r3 = 0;
+        r4 = 0;
+        r5 = 0;
+        r6 = 0;
+        r7 = 0;
+        r8 = 0;
+        r9 = 0;
+        r10 = 0;
+        r11 = 0;
+        r12 = 0;
+        r13 = 0;
+        r14 = 0;
+        r15 = 0;
+        r16 = 0;
+        r17 = 0;
+        r18 = 0;
+        r19 = 0;
+        r20 = 0;
+        r21 = 0;
+        r22 = 0;
+        r23 = 0;
+        r24 = 0;
+        r25 = 0;
+        r26 = 0;
+        r27 = 0;
+        r28 = 0;
+        r29 = 0;
+        r30 = 0;
+        r31 = 0;
+        r32 = 0;
+        r33 = 0;
+        r34 = 0;
+        r35 = 0;
+        r36 = 0;
+        r37 = 0;
+        r38 = 0;
+        r39 = 0;
+        r40 = 0;
     }
 }
