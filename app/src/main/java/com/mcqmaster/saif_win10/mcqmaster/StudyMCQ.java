@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -31,6 +32,8 @@ import com.google.android.gms.ads.AdView;
 import java.util.List;
 import java.util.Objects;
 import java.util.Observer;
+
+import io.github.kexanie.library.MathView;
 
 public class StudyMCQ extends AppCompatActivity {
 
@@ -108,7 +111,7 @@ public class StudyMCQ extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.another_test);
+        setContentView(R.layout.mcq_math_view);
         Firebase.setAndroidContext(this);
 
         //connecting with viewmodel class

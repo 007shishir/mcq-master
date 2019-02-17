@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Observer;
 
+import io.github.kexanie.library.MathView;
+
 public class StudyMcqV2 extends AppCompatActivity {
 
     //For inferential add
