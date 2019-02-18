@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -37,10 +38,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static Mcq_Database mcq_database;
-
-//    CardView mCV_bcs_bsp, mCV_current_world_bd, mCV_current_world_int, mCV_bcs_bvs, mCV_bcs_evs,
-//            mCV_bcs_bd, mCV_bcs_international, mCV_bcs_geo, mCV_bcs_generalS, mCV_bcs_it, mCV_bcs_math,
-//            mCV_bcs_mental, mCV_bcs_value, mCV_eng_grammar, mCV_bng_grammar, mCV_eng_vocab, mCV_gov_bank;
+    FloatingActionButton fab;
 
     TextView mCV_bcs_bsp, mCV_current_world_bd, mCV_current_world_int, mCV_bcs_bvs, mCV_bcs_evs,
             mCV_bcs_bd, mCV_bcs_international, mCV_bcs_geo, mCV_bcs_generalS, mCV_bcs_it, mCV_bcs_math,
@@ -56,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
 
         mcq_database = Room.databaseBuilder(getApplicationContext(), Mcq_Database.class, "McqDb").allowMainThreadQueries().build();
 
+
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MoreOption.class));
+            }
+        });
 
         mCV_bcs_bsp = findViewById(R.id.mCV_bcs_bsp);
         mCV_current_world_bd = findViewById(R.id.mCV_current_world_bd);
