@@ -31,4 +31,23 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="topic_name_and_subject">topic name and subject</string>
+    <string name="id">ID:</string>
+    <string name="card_status">card status</string>
+    <string name="question_no">question No:</string>
+    <string name="point_0_40">Point: 0/40</string>
+    <string name="tried_0_times">Tried 0 times</string>
+    <string name="question">question</string>
+    <string name="option_one">option one</string>
+    <string name="option_two">option two</string>
+    <string name="option_three">option three</string>
+    <string name="option_four">option four</string>
+    <string name="answer">ANSWER</string>
+    <string name="check">Check</string>
+    <string name="status">status</string>
+    <string name="submit">submit</string>
+    <string name="prev">prev</string>
+    <string name="refresh">refresh</string>
+    <string name="next">next</string>
+    <string name="explanation_is_here">Explanation is here</string>
 </resources>

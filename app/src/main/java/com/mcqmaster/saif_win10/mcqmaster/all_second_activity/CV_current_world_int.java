@@ -47,7 +47,7 @@ public class CV_current_world_int extends AppCompatActivity {
 
         //For Interstitial Add (Change Interstitial add unit later)
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId("ca-app-pub-2522810443010389/2863893374");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("current_world_int");
@@ -57,7 +57,7 @@ public class CV_current_world_int extends AppCompatActivity {
         mRecycleContent.setLayoutManager(new LinearLayoutManager(this));
 
         mHeader = findViewById(R.id.mHeader);
-        mHeader.setText(getResources().getString(R.string.current_world_bd));
+        mHeader.setText(getResources().getString(R.string.current_world_int));
 
     }
 

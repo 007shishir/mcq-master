@@ -13,10 +13,10 @@
         android:layout_height="wrap_content"
         android:background="#1e6739"
         android:backgroundTint="@color/colorPrimaryDark"
+        android:gravity="center"
         android:maxHeight="50dp"
         android:minHeight="40dp"
-        android:text="topic name and subject"
-        android:gravity="center"
+        android:text="@string/topic_name_and_subject"
         android:textAlignment="center"
         android:textColor="#fff"
         android:textSize="15sp"
@@ -33,7 +33,7 @@
         android:background="@color/header001"
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
-        android:text="ID: "
+        android:text="@string/id"
         android:textAlignment="center"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +47,7 @@
         android:background="@color/header001"
         android:maxWidth="150dp"
         android:minWidth="120dp"
-        android:text="card status"
+        android:text="@string/card_status"
         android:textAlignment="center"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="15sp"
@@ -63,7 +63,7 @@
         android:background="@color/header001"
         android:paddingEnd="3dp"
         android:paddingStart="3dp"
-        android:text="question No:"
+        android:text="@string/question_no"
         android:textAlignment="textStart"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintBaseline_toBaselineOf="@+id/mTxt_totalQ"
@@ -76,7 +76,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/header001"
-        android:text="Point: 0/40"
+        android:text="@string/point_0_40"
         android:textAlignment="center"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintBaseline_toBaselineOf="@+id/mTxt_cycle"
@@ -89,7 +89,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/header001"
-        android:text="Tried 0 times"
+        android:text="@string/tried_0_times"
         android:textAlignment="center"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,9 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         ads:adSize="SMART_BANNER"
-
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
-
+        ads:adUnitId="ca-app-pub-2522810443010389/6204125169"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -116,7 +114,6 @@
      below is the test add
      ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
      -->
-
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView4"
@@ -146,7 +143,7 @@
                 android:layout_marginStart="4dp"
 
                 android:paddingTop="2dp"
-                android:text="question "
+                android:text="@string/question"
                 android:textAlignment="center"
                 android:textColor="@android:color/background_dark"
                 android:textSize="16sp"
@@ -163,7 +160,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:background="@color/questionOption"
-                android:text="option one "
+                android:text="@string/option_one"
                 app:layout_constraintBottom_toTopOf="@+id/mChkOpt2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -176,7 +173,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:background="@color/questionOption"
-                android:text="option two"
+                android:text="@string/option_two"
                 android:textAlignment="viewStart"
                 app:layout_constraintBottom_toTopOf="@+id/mChkOpt3"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -190,7 +187,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:background="@color/questionOption"
-                android:text="option three"
+                android:text="@string/option_three"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 app:layout_constraintBottom_toTopOf="@+id/mChkOpt4"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -204,15 +201,13 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:background="@color/questionOption"
-                android:text="option four"
+                android:text="@string/option_four"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mChkOpt3" />
 
         </LinearLayout>
-
-
     </android.support.v7.widget.CardView>
 
 
@@ -229,7 +224,7 @@
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
         android:paddingTop="5dp"
-        android:text="ANSWER"
+        android:text="@string/answer"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -248,12 +243,12 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/button_sub_design"
 
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
         android:paddingBottom="5dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
         android:paddingTop="5dp"
 
-        android:text="Check"
+        android:text="@string/check"
         android:textAlignment="center"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintEnd_toStartOf="@+id/mTxt_PointEachQ"
@@ -271,12 +266,12 @@
         android:maxWidth="120dp"
         android:minWidth="100dp"
 
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
         android:paddingBottom="5dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
         android:paddingTop="5dp"
 
-        android:text="status "
+        android:text="@string/status"
         android:textAlignment="center"
         android:textColor="@color/common_google_signin_btn_text_light_pressed"
         app:layout_constraintEnd_toEndOf="parent"
@@ -293,7 +288,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="3dp"
         android:background="@drawable/button_background"
-        android:text="submit"
+        android:text="@string/submit"
         android:textAlignment="center"
         android:textColor="@color/common_google_signin_btn_text_dark_pressed"
         android:textSize="18sp"
@@ -308,7 +303,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:background="@drawable/answer_background"
-        android:text="prev"
+        android:text="@string/prev"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_refresh"
         app:layout_constraintEnd_toStartOf="@+id/btn_refresh"
         app:layout_constraintHorizontal_bias="0.5"
@@ -321,7 +316,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/answer_background"
-        android:text="refresh"
+        android:text="@string/refresh"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_next"
         app:layout_constraintEnd_toStartOf="@+id/btn_next"
         app:layout_constraintHorizontal_bias="0.5"
@@ -333,7 +328,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:background="@drawable/answer_background"
-        android:text="next"
+        android:text="@string/next"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -361,10 +356,10 @@
             android:id="@+id/mTxt_Expl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="2dp"
             android:gravity="center"
             android:padding="3dp"
-            android:layout_margin="2dp"
-            android:text="Explanation is here"
+            android:text="@string/explanation_is_here"
 
             android:textAlignment="center"
             android:textColor="@color/common_google_signin_btn_text_dark_focused" />
