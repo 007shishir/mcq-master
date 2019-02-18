@@ -48,6 +48,11 @@ dependencies {
     //For MathView
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'io.github.kexanie.library:MathView:0.0.6'
-
+    
+//    to stop collecting advertising ID
+    configurations {
+        all*.exclude group: 'com.google.firebase', module: 'firebase-common'
+        all*.exclude group: 'com.google.firebase', module: 'firebase-core'
+        all*.exclude group: 'com.google.firebase', module: 'firebase-iid' }
 }
 apply plugin: 'com.google.gms.google-services'

@@ -29,6 +29,8 @@ public class MoreOption extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu, menu);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
+                new PrivacyPolicy()).commit();
         return true;
     }
 
@@ -36,8 +38,7 @@ public class MoreOption extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item1:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
-                        new PrivacyPolicy()).addToBackStack(null).commit();
+                privacyPolicyFragment();
                 return true;
             case R.id.item2:
                 startActivity(new Intent(MoreOption.this, MainActivity.class));
@@ -46,5 +47,11 @@ public class MoreOption extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    private void privacyPolicyFragment()
+    {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
+                new PrivacyPolicy()).addToBackStack(null).commit();
     }
 }
