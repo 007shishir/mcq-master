@@ -28,4 +28,7 @@
     <string name="bangla">Bangla</string>
     <string name="bangla_grammar">Bangla Grammar</string>
     <string name="vocabulary">Vocabulary</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
