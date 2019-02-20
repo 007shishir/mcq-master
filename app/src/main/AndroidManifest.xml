@@ -38,11 +38,10 @@
         <activity android:name=".all_second_activity.CV_eng_vocab" />
         <activity android:name=".StudyMCQ" />
 
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-2522810443010389~4508857974" />
-        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
-        <!-- My AdMob App ID: ca-app-pub-2522810443010389~4508857974 -->
+        <!--<meta-data-->
+            <!--android:name="com.google.android.gms.ads.APPLICATION_ID"-->
+            <!--android:value="ca-app-pub-2522810443010389~4508857974" />-->
+
         <activity android:name=".all_second_activity.CV_gov_bank" />
         <activity android:name=".StudyMcqV2" />
         <activity android:name=".MoreOption"/>

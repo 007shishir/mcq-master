@@ -19,14 +19,8 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 
 import java.util.List;
 import java.util.Objects;
@@ -35,9 +29,6 @@ import java.util.Observer;
 import io.github.kexanie.library.MathView;
 
 public class StudyMcqV2 extends AppCompatActivity {
-
-    //For inferential add
-    private InterstitialAd mInterstitialAd;
 
     //geting mcq_viewmodel object
     private Mcq_ViewModel mcq_viewModel;
@@ -105,8 +96,6 @@ public class StudyMcqV2 extends AppCompatActivity {
     private Button btn_prev;
     private Button btn_refresh;
 
-    AdView mAdView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,36 +104,6 @@ public class StudyMcqV2 extends AppCompatActivity {
 
         //connecting with viewmodel class
         mcq_viewModel = ViewModelProviders.of(this).get(Mcq_ViewModel.class);
-
-
-        //For all the add (Change app unit id later)
-        MobileAds.initialize(this,
-                "ca-app-pub-2522810443010389~4508857974");
-
-        // Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713
-        // My AdMob App ID: ca-app-pub-2522810443010389~4508857974
-
-        //sample interstitial add unit id: ca-app-pub-3940256099942544/1033173712
-        //my interstitial add unit id: ca-app-pub-2522810443010389/2863893374
-
-        //For Interstitial Add (Change Interstitial add unit later)
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-2522810443010389/2863893374");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-
-
-        //This code will run after Interstitial code is closed
-        mInterstitialAd.setAdListener(new AdListener() {
-                                          @Override
-                                          public void onAdClosed() {
-                                              StudyMcqV2.super.onBackPressed();
-                                          }
-                                      }
-        );
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
 
 
         mPost_key = Objects.requireNonNull(getIntent().getExtras()).getString("key_name");
@@ -1765,15 +1724,6 @@ public class StudyMcqV2 extends AppCompatActivity {
             mQuestNum--;
             eachQuestStatus();
             readFromRoomDatabase();
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        } else {
-            super.onBackPressed();
         }
     }
 

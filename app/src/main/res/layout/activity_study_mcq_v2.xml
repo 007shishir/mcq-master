@@ -172,14 +172,16 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="wrap_content"
-        android:minWidth="350dp"
-        android:maxWidth="380dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="5dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/explanation_background"
+        android:maxWidth="380dp"
         android:minHeight="100dp"
+        android:minWidth="350dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_refresh"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_max="150dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -214,12 +216,12 @@
         android:id="@+id/btn_refresh"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="5dp"
         android:layout_marginStart="5dp"
         android:background="@drawable/answer_background"
         android:text="refresh"
-        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_next"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_prev" />
@@ -260,25 +262,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/mTxt_ans"
         app:layout_constraintTop_toBottomOf="@+id/mChkOpt4" />
-
-    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent" />
-    <!--
-    This is main add unit ID:
-    ads:adUnitId="ca-app-pub-2522810443010389/6204125169"
-
-     below is the test add
-     ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
-     -->
 
 
     <Button

@@ -10,10 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mcqmaster.saif_win10.mcqmaster.Parameter;
@@ -23,9 +19,6 @@ import com.mcqmaster.saif_win10.mcqmaster.StudyMcqV2;
 
 public class CV_bcs_bd extends AppCompatActivity {
 
-    //For inferential add
-    private InterstitialAd mInterstitialAd;
-
     private RecyclerView mRecycleContent;
     private DatabaseReference mDatabase;
     TextView mHeader;
@@ -34,19 +27,6 @@ public class CV_bcs_bd extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cv_bcs_bsp);
-
-        //For all the add (Change app unit id later)
-        MobileAds.initialize(this,
-                "ca-app-pub-2522810443010389~4508857974");
-        // Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713
-        // My AdMob App ID: ca-app-pub-2522810443010389~4508857974
-
-        //sample interstitial add unit id: ca-app-pub-3940256099942544/1033173712
-        //my interstitial add unit id: ca-app-pub-2522810443010389/2863893374
-
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-2522810443010389/2863893374");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("bcs_bd");
         mDatabase.keepSynced(false);
@@ -76,31 +56,13 @@ public class CV_bcs_bd extends AppCompatActivity {
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (mInterstitialAd.isLoaded()) {
-                            mInterstitialAd.show();
-                        } else {
                             Intent intent = new Intent(CV_bcs_bd.this, StudyMcqV2.class);
                             intent.putExtra("key_name", post_key);
                             intent.putExtra("childName", "bcs_bd");
                             Toast.makeText(CV_bcs_bd.this, "Please make sure you turn off the rotation of your device", Toast.LENGTH_LONG).show();
                             startActivity(intent);
-                        }
                     }
                 });
-
-                //After interstitial add is shown, this code will run
-                mInterstitialAd.setAdListener(new AdListener()
-                                              {
-                                                  @Override
-                                                  public void onAdClosed() {
-                                                      Intent intent = new Intent(CV_bcs_bd.this, StudyMcqV2.class);
-                                                      intent.putExtra("key_name", post_key);
-                                                      intent.putExtra("childName", "bcs_bd");
-                                                      Toast.makeText(CV_bcs_bd.this, "Please make sure you turn off the rotation of your device", Toast.LENGTH_LONG).show();
-                                                      startActivity(intent);
-                                                  }
-                                              }
-                );
 
             }
         };

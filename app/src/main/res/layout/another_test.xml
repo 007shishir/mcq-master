@@ -97,24 +97,6 @@
         app:layout_constraintStart_toEndOf="@+id/mTxt_totalQ"
         app:layout_constraintTop_toBottomOf="@+id/mTxt_level" />
 
-
-    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-2522810443010389/6204125169"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-    <!--
-    This is main add unit ID:
-    ads:adUnitId="ca-app-pub-2522810443010389/6204125169"
-
-     below is the test add
-     ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
-     -->
-
     <android.support.v7.widget.CardView
         android:id="@+id/cardView4"
         android:layout_width="0dp"
@@ -326,10 +308,11 @@
         android:id="@+id/btn_next"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/answer_background"
         android:text="@string/next"
-        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_refresh"
