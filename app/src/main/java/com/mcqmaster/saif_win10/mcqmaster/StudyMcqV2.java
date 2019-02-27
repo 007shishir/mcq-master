@@ -19,6 +19,9 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -96,15 +99,22 @@ public class StudyMcqV2 extends AppCompatActivity {
     private Button btn_prev;
     private Button btn_refresh;
 
+    //AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.another_test);
         Firebase.setAndroidContext(this);
 
+//        mAdView = findViewById(R.id.mAdView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
+//        // Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713
+//        MobileAds.initialize(this, "ca-app-pub-2522810443010389~4508857974");
+
         //connecting with viewmodel class
         mcq_viewModel = ViewModelProviders.of(this).get(Mcq_ViewModel.class);
-
 
         mPost_key = Objects.requireNonNull(getIntent().getExtras()).getString("key_name");
         child_Name = Objects.requireNonNull(getIntent().getExtras()).getString("childName");
